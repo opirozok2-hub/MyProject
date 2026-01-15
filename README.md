@@ -1,20 +1,39 @@
-<<<<<<< HEAD
-# my_project
+# JokeSwipe 😂
 
-A new Flutter project.
+Мобильное приложение на Flutter, где ты свайпаешь карточки с анекдотами, как в Tinder, только вместо людей — шутки!
 
-## Getting Started
+**Свайп вправо** — ржу, запоминаю  
+**Свайп влево** — фу, следующая  
+**Свайп вверх** — поделиться с друзьями
 
-This project is a starting point for a Flutter application.
+### Основные фичи
+- Бесконечная лента анекдотов из JokeAPI[](https://v2.jokeapi.dev)
+- Красивые анимированные карточки с Tinder-подобным свайпом
+- Поддержка разных типов шуток: Programming, Dark, Pun, Miscellaneous и т.д.
+- Тёмная/светлая тема (авто по системе)
+- Сохранение понравившихся шуток (в планах)
+- Полностью на русском и английском (в планах)
 
-A few resources to get you started if this is your first Flutter project:
+### Скриншоты
+(пока пусто — добавишь свои после первой версии)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<!-- 
+Здесь будут скриншоты после реализации:
+![Главный экран](screenshots/main.png)
+![Свайп](screenshots/swipe.gif)
+-->
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# MyProject
->>>>>>> c8234ca7d30240931962b8b70609c8090bcc69ea
+### Технологии
+- Flutter 3.24+ (на момент разработки)
+- Dart 3.5+
+- Пакеты:
+  - http — для запросов к API
+  - flutter_card_swiper / card_swiper — для свайпа карточек
+  - shared_preferences — для избранного (будет)
+  - provider / riverpod — управление состоянием (будет)
+
+### Как запустить проект локально
+1. Клонируй репозиторий
+   ```bash
+   git clone https://github.com/opirozok2-hub/MyProject.git
+   cd MyProject
