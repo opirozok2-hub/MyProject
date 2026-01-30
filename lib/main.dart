@@ -1,4 +1,3 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
 import 'screens/joke_screen1.dart';
 import 'screens/joke_screen2.dart';
@@ -32,7 +31,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0; // 0 — первая шутка, 1 — вторая
+  int _currentIndex = 0;
 
   void _switchJoke(int newIndex) {
     setState(() {
@@ -45,15 +44,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Основной контент с градиентом
           _currentIndex == 0
               ? JokeScreen1(onArrowTap: () => _switchJoke(1))
               : JokeScreen2(onArrowTap: () => _switchJoke(0)),
-
-          // Меню (три полоски) в правом верхнем углу
           Positioned(
-            top: 40,   // отступ от верхнего края экрана
-            right: 20, // отступ справа
+            top: 40,
+            right: 20,
             child: PopupMenuButton<int>(
               icon: const Icon(
                 Icons.menu,
