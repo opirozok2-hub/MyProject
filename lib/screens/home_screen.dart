@@ -1,30 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screens/joke_screen1.dart';
-import 'screens/joke_screen2.dart';
-import 'screens/login_screen.dart'; // New import
-import 'package:flutter/material.dart';
-import 'screens/login_screen.dart'; // Импорт для начального экрана
+import 'joke_screen1.dart';
+import 'joke_screen2.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Joke Design',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const LoginScreen(),
-    );
-  }
-}
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 

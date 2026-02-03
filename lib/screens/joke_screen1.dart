@@ -22,11 +22,36 @@ class _JokeScreen1State extends State<JokeScreen1> {
 
   Future<void> _loadJoke() async {
     setState(() => _loading = true);
-    final joke = await _service.fetchDark();
-    setState(() {
-      _joke = joke;
-      _loading = false;
-    });
+
+    // Load cached first
+    final cachedJoke = await _service.loadCachedJoke('dark_joke');
+    if (cachedJoke != null) {
+      setState(() {
+        _joke = cachedJoke;
+        _loading = false;
+      });
+    }
+
+    // Then fetch new
+    try {
+      final newJoke = await _service.fetchDark();
+      await _service.cacheJoke('dark_joke', newJoke);
+      setState(() {
+        _joke = newJoke;
+        _loading = false;
+      });
+    } catch (e) {
+      if (cachedJoke == null) {
+        setState(() => _loading = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Ошибка загрузки: $e. Нет кэша.')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Использую кэш (оффлайн)')),
+        );
+      }
+    }
   }
 
   @override
@@ -49,7 +74,7 @@ class _JokeScreen1State extends State<JokeScreen1> {
                 child: _loading
                     ? const CircularProgressIndicator()
                     : Text(
-                        _joke?.render() ?? '',
+                        _joke?.render() ?? 'Нет шутки',
                         style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
