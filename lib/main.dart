@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'screens/joke_screen1.dart';
 import 'screens/joke_screen2.dart';
-import 'screens/login_screen.dart'; // New import
-import 'package:flutter/material.dart';
-import 'screens/login_screen.dart'; // Импорт для начального экрана
+import 'screens/login_screen.dart';
+import 'services/notification_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService().initialize();
   runApp(const MyApp());
 }
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 

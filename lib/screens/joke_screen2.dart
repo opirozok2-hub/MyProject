@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/joke_service.dart';
+import '../services/notification_service.dart';
 
 class JokeScreen2 extends StatefulWidget {
   final VoidCallback onArrowTap;
@@ -11,6 +12,7 @@ class JokeScreen2 extends StatefulWidget {
 
 class _JokeScreen2State extends State<JokeScreen2> {
   final JokeService _service = JokeService();
+  final NotificationService _notificationService = NotificationService();
   Joke? _joke;
   bool _loading = true;
 
@@ -23,7 +25,6 @@ class _JokeScreen2State extends State<JokeScreen2> {
   Future<void> _loadJoke() async {
     setState(() => _loading = true);
 
-    // Load cached first
     final cachedJoke = await _service.loadCachedJoke('normal_joke');
     if (cachedJoke != null) {
       setState(() {
@@ -32,7 +33,6 @@ class _JokeScreen2State extends State<JokeScreen2> {
       });
     }
 
-    // Then fetch new
     try {
       final newJoke = await _service.fetchNormal();
       await _service.cacheJoke('normal_joke', newJoke);
@@ -40,9 +40,11 @@ class _JokeScreen2State extends State<JokeScreen2> {
         _joke = newJoke;
         _loading = false;
       });
+      await _notificationService.showJokeNotification(newJoke.render());
     } catch (e) {
       if (cachedJoke == null) {
         setState(() => _loading = false);
+        await _notificationService.showErrorNotification();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Ошибка загрузки: $e. Нет кэша.')),
         );
@@ -84,8 +86,6 @@ class _JokeScreen2State extends State<JokeScreen2> {
                       ),
               ),
               const SizedBox(height: 40),
-
-              /// назад к dark
               GestureDetector(
                 onTap: widget.onArrowTap,
                 child: const Icon(
@@ -94,10 +94,7 @@ class _JokeScreen2State extends State<JokeScreen2> {
                   color: Colors.black87,
                 ),
               ),
-
               const SizedBox(height: 40),
-
-              /// ❤️ обновление шутки
               GestureDetector(
                 onTap: _loadJoke,
                 child: const Icon(

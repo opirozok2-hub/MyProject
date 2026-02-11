@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'  # Это позволит новые версии пакетов без конфликтов
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -13,11 +13,12 @@ dependencies:
   crypto: ^3.0.5
   cupertino_icons: ^1.0.8
   http: ^1.2.2
+  local_notifier: ^0.1.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0  # Обнови на свежую версию, если нужно
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true
